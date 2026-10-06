@@ -1,0 +1,24 @@
+# 02 - Confidence Thresholding Failures in Automated Moderation
+
+> Case Study Series: Breaking AI to Make it Safer | Trust & Safety
+
+## Summary
+This study analyzes a flaw in automated moderation: taking auto-action on medium-confidence scores (0.65-0.80) without human review, causing false positives.
+
+## How It Fails
+![Diagram](thresholding-diagram.png)
+
+Current Flow: Image Input -> Visual Classifier Only -> Confidence 0.68 -> Auto-Flag/Ban (No Context)
+
+Problem: Legitimate content gets banned. High false positive rate.
+
+## Proposed Fix
+Image + Text Context + Account History -> Combined Confidence Score
+- <0.7 = Log Only
+- 0.7-0.9 = Human Review Queue
+- >0.9 = Auto-Action with Audit Log
+
+Result: Higher precision, fewer false positives, human oversight, full auditability.
+
+## Disclaimer
+Student research based on public reports. No private data or evasion instructions.
